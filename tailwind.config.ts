@@ -5,30 +5,48 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Design tokens — deep space, museum-quiet, not the generic
-        // cream/terracotta or acid-green-on-black defaults.
-        void: "#0A0D16",        // primary background — deep space, not flat black
-        surface: "#11162399",   // panel background (used with opacity)
-        panel: "#131A29",       // solid card background
-        line: "#232B3D",        // hairline borders
-        ink: "#E9ECF4",         // primary text
-        mute: "#8D96AC",        // secondary text
-        faint: "#5B6478",       // tertiary / metadata text
-        ember: "#C9974A",       // starlight bronze — primary accent
-        nebula: "#4E9C93",      // secondary accent, teal nebula glow
-        signal: "#B9673F"       // warning / error tone, warm rust
+        // Palette from the brief: deep space black, dark navy, soft space
+        // purple, stellar blue, white for stars/text.
+        void: "#05050B",
+        navy: "#0B1226",
+        "navy-light": "#141D3A",
+        purple: "#6C4FD1",
+        "purple-soft": "#8B72E8",
+        stellar: "#6FA8FF",
+        starlight: "#F5F6FA",
+        mute: "#9AA3C0",
+        faint: "#5C6484"
       },
       fontFamily: {
-        arabic: ["var(--font-arabic)", "Tahoma", "sans-serif"],
-        kufi: ["var(--font-kufi)", "var(--font-arabic)", "sans-serif"],
+        display: ["var(--font-display)", "sans-serif"],
+        body: ["var(--font-body)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"]
       },
       maxWidth: {
         prose: "68ch"
       },
-      borderRadius: {
-        sm: "3px",
-        DEFAULT: "6px"
+      boxShadow: {
+        glow: "0 0 40px -10px rgba(108, 79, 209, 0.45)",
+        "glow-blue": "0 0 40px -10px rgba(111, 168, 255, 0.4)"
+      },
+      keyframes: {
+        twinkle: {
+          "0%, 100%": { opacity: "0.25" },
+          "50%": { opacity: "1" }
+        },
+        "drift-slow": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-200px)" }
+        },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" }
+        }
+      },
+      animation: {
+        twinkle: "twinkle 3.2s ease-in-out infinite",
+        "drift-slow": "drift-slow 60s linear infinite",
+        "spin-slow": "spin-slow 40s linear infinite"
       }
     }
   },

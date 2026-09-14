@@ -1,38 +1,20 @@
-export type NavLink = {
-  labelAr: string;
+export interface NavLink {
+  label: string;
   href: string;
-};
+}
 
-// Central nav config. Add a route + a matching page under app/ to extend.
-// Sections not yet built link to routes marked (status: "planned") so the
-// homepage/nav can grow without dead links — see README for the build order.
 export const primaryNav: NavLink[] = [
-  { labelAr: "الرئيسية", href: "/" },
-  { labelAr: "استكشف", href: "/explore" },
-  { labelAr: "النظام الشمسي", href: "/solar-system" },
-  { labelAr: "النجوم", href: "/stars" },
-  { labelAr: "المجرات", href: "/galaxies" },
-  { labelAr: "السدم", href: "/nebulae" },
-  { labelAr: "الثقوب السوداء", href: "/black-holes" },
-  { labelAr: "الكواكب الخارجية", href: "/exoplanets" },
-  { labelAr: "الأقمار", href: "/moons" },
-  { labelAr: "الأبراج", href: "/constellations" },
-  { labelAr: "الكون", href: "/universe" },
-  { labelAr: "المهمات الفضائية", href: "/missions" },
-  { labelAr: "التلسكوبات", href: "/telescopes" },
-  { labelAr: "سماء الليل", href: "/night-sky" },
-  { labelAr: "الخط الزمني الكوني", href: "/timeline" },
-  { labelAr: "المختبر الكوني", href: "/lab" },
-  { labelAr: "أكاديمية الفلك", href: "/academy" },
-  { labelAr: "معرض الصور", href: "/gallery" },
-  { labelAr: "قاموس الفلك", href: "/glossary" }
+  { label: "Explore", href: "/explore" },
+  { label: "Solar System", href: "/solar-system" },
+  { label: "Star Map", href: "/star-map" },
+  { label: "Cosmic Scale", href: "/cosmic-scale" },
+  { label: "Timeline", href: "/timeline" },
+  { label: "Glossary", href: "/glossary" }
 ];
 
 export const footerNav: NavLink[] = [
-  { labelAr: "عن أطلس الكون", href: "/about" },
-  { labelAr: "قاموس الفلك", href: "/glossary" },
-  { labelAr: "المصادر العلمية", href: "/about#sources" },
-  { labelAr: "إمكانية الوصول", href: "/about#accessibility" },
-  { labelAr: "الخصوصية", href: "/about#privacy" },
-  { labelAr: "إخلاء المسؤولية", href: "/about#disclaimer" }
+  { label: "About", href: "/about" },
+  { label: "Explore", href: "/explore" },
+  { label: "Cosmic Discovery", href: "/discover" },
+  { label: "Glossary", href: "/glossary" }
 ];

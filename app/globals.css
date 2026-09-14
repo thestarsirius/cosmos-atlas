@@ -6,10 +6,6 @@
   color-scheme: dark;
 }
 
-* {
-  border-color: theme("colors.line");
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -27,32 +23,26 @@ html {
 
 body {
   background-color: theme("colors.void");
-  color: theme("colors.ink");
+  color: theme("colors.starlight");
 }
 
-/* visible keyboard focus everywhere — accessibility floor */
 :focus-visible {
-  outline: 2px solid theme("colors.ember");
-  outline-offset: 2px;
+  outline: 2px solid theme("colors.stellar");
+  outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* subtle fixed starfield, decorative only, doesn't block content or motion prefs */
-.starfield {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    radial-gradient(1px 1px at 20% 30%, #ffffff55 50%, transparent 100%),
-    radial-gradient(1px 1px at 70% 65%, #ffffff40 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 40% 80%, #ffffff35 50%, transparent 100%),
-    radial-gradient(1px 1px at 85% 15%, #ffffff45 50%, transparent 100%),
-    radial-gradient(1px 1px at 55% 45%, #ffffff30 50%, transparent 100%);
-  background-repeat: repeat;
-  background-size: 600px 600px;
+/* soft nebula wash — used sparingly behind hero content only */
+.nebula-glow {
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 20%, rgba(108, 79, 209, 0.25), transparent 60%),
+    radial-gradient(ellipse 50% 35% at 75% 65%, rgba(111, 168, 255, 0.15), transparent 60%);
 }
 
 .text-balance {
   text-wrap: balance;
+}
+
+canvas {
+  display: block;
 }

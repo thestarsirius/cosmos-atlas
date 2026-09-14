@@ -1,101 +1,115 @@
-# أطلس الكون — COSMOS
+# Cosmos Atlas
 
-منصة تعليمية عربية تفاعلية عن الفلك وعلوم الكون. رحلة معرفية من الأرض إلى أبعد حدود الكون المرصود.
+An interactive atlas of the universe. Explore the universe — one world at a time.
 
-> **ملاحظة مهمة عن حالة المشروع**: هذا المستودع هو **الأساس المعماري** لمنصة COSMOS الكاملة الموصوفة في
-> ملخص المشروع الأصلي (70 قسمًا). القسم المُنجز بالكامل حتى الآن هو **النظام الشمسي** (الشمس والكواكب
-> الثمانية، ببيانات حقيقية ومصادر موثقة)، بالإضافة إلى نظام التصميم، والتنقل، والقاموس، وصفحة "عن الموقع".
-> كل الأقسام الأخرى (النجوم، المجرات، الثقوب السوداء...) مصمَّمة في `data/navigation.ts` وتتبع بالضبط نفس
-> نمط البيانات في `data/types.ts` و`data/planets.ts` — إضافتها تعني نسخ هذا النمط، وليس إعادة بناء المعمارية.
-> هذا قرار متعمد: محتوى علمي حقيقي وكامل لقسم واحد، أفضل من عشرات الأقسام الفارغة.
+## What's here
 
-## لماذا هذا المشروع؟
+A from-scratch rebuild focused on the experience itself rather than a navbar-and-cards info site:
 
-عدد قليل جدًا من المصادر التعليمية الجادة عن الفلك متوفر باللغة العربية أصلًا (لا مترجمًا). أطلس الكون
-يحاول سد هذه الفجوة بمحتوى دقيق علميًا، وقابل للتوسع، ومجاني بالكامل النشر والاستضافة.
+- **Cinematic hero** with a canvas starfield (three parallax layers, twinkle, occasional shooting stars,
+  mouse-parallax) and a staged entrance animation.
+- **Interactive Solar System** — the Sun and eight planets on real (CSS-animated) orbits, with drag-to-pan,
+  zoom controls, and click-through to a detail page for each planet.
+- **Star Map** — click through notable real stars (Sirius, Vega, Polaris, Betelgeuse...) for their stats.
+- **Cosmic Scale** — a slider moving from a human being up to the observable universe.
+- **Cosmic Timeline** — Big Bang to today, with each entry labeled as observed, modeled, or an open question.
+- **Explore** — search and filter across every category (planets, stars, galaxies, nebulae, moons, black
+  holes, asteroids, comets) from one index.
+- **Cosmic Discovery** — a daily-changing featured object, plus a "Discover another" shuffle.
+- **Did You Know** — a rotating pool of sourced space facts.
+- **Glossary** — searchable core astronomy terms.
+- No external images: all visuals are CSS/canvas-generated, per the brief, so there's nothing to license or
+  break at build time.
 
-## المزايا المُنجزة في هذا الأساس
+## Tech stack
 
-- واجهة عربية RTL كاملة من الجذر (لا ترجمة آلية لواجهة إنجليزية).
-- نظام تصميم متسق: ألوان، خطوط عربية (Noto Kufi Arabic للعناوين، IBM Plex Sans Arabic للنصوص)، مسافات.
-- تنقل رئيسي كامل + قائمة جوال.
-- قسم النظام الشمسي: الشمس + 8 كواكب، كل واحد بصفحة تفصيلية تتضمن:
-  - بيانات فيزيائية حقيقية (القطر، الكتلة، الجاذبية، المسافة، مدة الدوران...).
-  - شرح على مستويين (مبسّط ومتعمّق) + قسم "للمستكشف".
-  - "كيف عرف العلماء ذلك؟" حيث ينطبق.
-  - "هل تعلم؟" — حقائق قابلة للتتبع لمصدرها.
-  - مصادر علمية حقيقية (NASA Planetary Fact Sheets).
-  - "مواضيع ذات صلة" للتصفح الأفقي.
-- قاموس فلكي قابل للبحث بـ 12 مصطلحًا حقيقيًا (قابل للتوسع لمئات المصطلحات بنفس البنية).
-- صفحة "عن الموقع" تتضمن إخلاء المسؤولية المطلوب صراحةً (لا علاقة رسمية بناسا/ESA).
-- sitemap.xml و robots.ts وبيانات Open Graph/metadata لكل صفحة.
-- إمكانية وصول أساسية: تخطٍّ إلى المحتوى، focus مرئي، احترام `prefers-reduced-motion`، تباين ألوان كافٍ.
+- **Next.js 15 (App Router) + React 19 + TypeScript**
+- **Tailwind CSS** for the design system (tokens in `tailwind.config.ts`)
+- **Framer Motion** for the hero entrance, discovery-card transitions, and cosmic-scale transitions
+- **`output: "export"`** in `next.config.js` — the whole site builds to static HTML/CSS/JS with no server
+  runtime required, which is what makes free Cloudflare Pages hosting a two-click process (see
+  `DEPLOYMENT-CLOUDFLARE.md`)
 
-## البنية التقنية
-
-- **Next.js 14 (App Router) + TypeScript + React 18**
-- **Tailwind CSS** لنظام التصميم (الرموز في `tailwind.config.ts`)
-- **Framer Motion** مُضاف كاعتمادية جاهزة للحركات المدروسة عند الحاجة (غير مستخدم بإفراط)
-- لا اعتمادية على أي خدمة مدفوعة. لا مفاتيح API مطلوبة لتشغيل الموقع.
+## Project structure
 
 ```
-/app                     صفحات التطبيق (App Router)
-  /solar-system           فهرس النظام الشمسي
-  /solar-system/[slug]     صفحة كوكب ديناميكية
-  /explore                 مركز الاستكشاف
-  /glossary                القاموس
-  /about                   عن الموقع
-  layout.tsx, page.tsx, globals.css, sitemap.ts, robots.ts
-/components               مكونات قابلة لإعادة الاستخدام (Navbar, Footer, ObjectCard, SourceCard...)
-/data                     نماذج البيانات + المحتوى الفعلي (types.ts, planets.ts, glossary.ts, navigation.ts)
-/lib                      أدوات مساعدة عامة (مكان جاهز للنمو)
+/app
+  page.tsx                        Homepage (hero, discovery, quick launch, did-you-know)
+  layout.tsx, globals.css         Root shell, fonts, starfield mount
+  /solar-system                   Orbit view hub
+  /solar-system/[slug]            Planet detail (Next.js 15 async params)
+  /explore                        Search + category filter hub
+  /explore/[category]/[slug]      Generic detail page for every non-planet category
+  /star-map, /cosmic-scale, /timeline, /glossary, /about, /discover
+  sitemap.ts, robots.ts
+/components                       Navbar, Footer, Starfield, ObjectCard, EntryDetail,
+                                   AnimatedStat, SolarSystemOrbit, StarMap, CosmicScale,
+                                   DiscoveryCard, DidYouKnow, ExploreClient
+/data                             types.ts + one file per category + index.ts aggregator
+/lib                               random.ts (daily/random discovery picks)
 ```
 
-## نموذج البيانات
+## Data model
 
-كل جسم فلكي (كوكب، نجم، مجرة...) يتبع الواجهة `CosmicObject` في `data/types.ts`: وصف قصير، شرح بثلاثة
-مستويات، قياسات بوحداتها، حقائق، مصادر، وروابط ذات صلة. أضف قسمًا جديدًا بإنشاء ملف بيانات جديد
-(`data/stars.ts` مثلًا) يصدّر مصفوفة من `CosmicObject[]`، ثم صفحة فهرس وصفحة `[slug]` تعيد استخدام
-`ObjectCard` و`SourceCard` والمكونات الموجودة — تمامًا كما في `app/solar-system`.
+Every explorable object — planet, star, galaxy, nebula, moon, black hole, asteroid, comet — implements the
+same `CosmicEntry` interface (`data/types.ts`): name, tagline, summary, deep-dive, stats with units, facts,
+a source, and a color used for its glow/dot everywhere it's rendered. `data/index.ts` merges every category
+file into one `allEntries` array that Explore, Star Map, and Cosmic Discovery all read from — adding a new
+object is adding one entry to a data file, not touching any component.
 
-## خارطة الطريق (بالترتيب المقترح)
+Planets carry a few extra fields (`orbitRadiusPx`, `orbitPeriodSec`, `relativeSize`) used only by the orbit
+visualization; those are explicitly relative/illustrative, not physically scaled — the real, sourced numbers
+live in each planet's `stats`.
 
-1. النجوم + كتالوج النجوم (Star Catalog)
-2. المجرات (درب التبانة، أندروميدا...)
-3. السدم
-4. الثقوب السوداء
-5. الكواكب الخارجية + مستكشف تفاعلي
-6. الأقمار
-7. الأبراج (88 كوكبة) + خريطة تفاعلية
-8. الخط الزمني الكوني
-9. المختبر الكوني (محاكاات: الجاذبية، المدارات، التطور النجمي...)
-10. أكاديمية الفلك + نظام الاختبارات
-11. محرك بحث داخلي شامل
-12. معرض صور (بترخيص وائتمان موثّق لكل صورة)
+## Next.js 15 correctness
 
-## الدقة العلمية
+This project targets Next.js 15's breaking change to dynamic route params. Both dynamic routes
+(`/solar-system/[slug]` and `/explore/[category]/[slug]`) type `params` as a `Promise` and `await` it in both
+the page component and `generateMetadata`:
 
-- كل رقم علمي مصدره NASA/ESA/IAU أو قواعد بيانات علمية معروفة (`data/planets.ts` يوثّق المصدر لكل قسم).
-- القيم التقريبية مُعلَّم عليها صراحة (`approximate: true`).
-- الأعداد المتغيرة بمرور الوقت (مثل عدد أقمار المشتري) صيغت كـ"أكثر من" بدل رقم ثابت قد يصبح قديمًا.
-- لا صور أو استشهادات أو روابط مُختلقة في هذا المستودع.
+```ts
+export default async function PlanetPage({
+  params
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  // ...
+}
+```
 
-## التطوير المحلي
+`generateStaticParams` is unaffected by this change and returns plain objects as before.
+
+## Local development
 
 ```bash
 npm install
 npm run dev
-# افتح http://localhost:3000
+# open http://localhost:3000
 ```
 
-راجع `DEPLOYMENT.md` لنشر الموقع مجانًا عبر GitHub + Vercel.
+To produce the static site that gets deployed:
 
-## الترخيص
+```bash
+npm run build
+# output lands in /out
+```
 
-المحتوى البرمجي مفتوح المصدر (MIT). المحتوى العلمي مبني على مصادر عامة مُشار إليها؛ يُرجى مراجعة شروط
-استخدام كل مصدر (NASA, ESA...) قبل إعادة استخدام صور أو نصوص منها مباشرة.
+See `DEPLOYMENT-CLOUDFLARE.md` for the full, beginner-friendly path from this folder to a live, free
+Cloudflare Pages URL.
 
-## إخلاء مسؤولية
+## Honest note on verification
 
-أطلس الكون مشروع تعليمي مستقل، وليس موقعًا رسميًا تابعًا لناسا أو وكالة الفضاء الأوروبية أو أي جهة علمية
-أخرى.
+This codebase was written and hand-checked (import consistency, brace balance, Next.js 15 API usage) in an
+environment without internet access, so `npm install` / `npm run build` could not be executed here. Every
+file was written to be syntactically and structurally correct, but your own `npm run build` is the real
+first test. If it surfaces an error, share it and it'll get fixed.
+
+## License
+
+Code: MIT (see `LICENSE`). Scientific figures are sourced from NASA, SIMBAD, and the Event Horizon Telescope
+Collaboration — check each source's own terms before reusing their text or imagery directly.
+
+## Disclaimer
+
+Cosmos Atlas is an independent project and is not affiliated with NASA, ESA, or any other space agency.

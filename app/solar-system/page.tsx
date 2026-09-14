@@ -1,42 +1,33 @@
 import type { Metadata } from "next";
 import { planets } from "@/data/planets";
+import SolarSystemOrbit from "@/components/SolarSystemOrbit";
 import ObjectCard from "@/components/ObjectCard";
-import { Breadcrumbs } from "@/components/Misc";
+import { Breadcrumbs } from "@/components/EntryDetail";
 
 export const metadata: Metadata = {
-  title: "النظام الشمسي",
-  description: "الشمس وكواكب النظام الشمسي الثمانية، بياناتها الفيزيائية ومداراتها ومصادرها العلمية."
+  title: "Solar System",
+  description: "An interactive orbit view of the Sun and eight planets, with real physical data for each world."
 };
 
 export default function SolarSystemPage() {
-  const sun = planets.find((p) => p.id === "sun")!;
-  const rest = planets.filter((p) => p.id !== "sun");
-
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12">
-      <Breadcrumbs items={[{ labelAr: "الرئيسية", href: "/" }, { labelAr: "النظام الشمسي" }]} />
-      <h1 className="font-kufi text-3xl sm:text-4xl text-ink mt-4">النظام الشمسي</h1>
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-28 pb-16">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Solar System" }]} />
+      <h1 className="font-display text-3xl sm:text-5xl text-starlight mt-4 text-balance">The Solar System</h1>
       <p className="mt-3 text-mute max-w-prose leading-8">
-        نظامنا الشمسي يتكوّن من الشمس وكل ما يدور حولها بفعل جاذبيتها: ثمانية كواكب، وكواكب قزمة، وعشرات الأقمار،
-        وحزام الكويكبات، والمذنبات، وحزام كايبر البعيد، وسحابة أورت التي تمتد إلى أطراف تأثير جاذبية الشمس.
+        The Sun and everything bound to it by gravity — eight planets, dozens of moons, and countless smaller
+        bodies. Drag to pan, use the zoom controls, and click any planet to open its page.
       </p>
 
       <div className="mt-10">
-        <ObjectCard obj={sun} href={`/solar-system/${sun.slug}`} />
+        <SolarSystemOrbit />
       </div>
 
-      <h2 className="font-kufi text-xl text-ink mt-12 mb-5">الكواكب الثمانية</h2>
+      <h2 className="font-display text-xl text-starlight mt-14 mb-5">All eight planets</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {rest.map((p) => (
-          <ObjectCard key={p.id} obj={p} href={`/solar-system/${p.slug}`} />
+        {planets.map((p) => (
+          <ObjectCard key={p.id} entry={p} />
         ))}
-      </div>
-
-      <div className="mt-12 rounded border border-line bg-panel/40 p-6 text-sm text-mute leading-7">
-        <p>
-          أجسام أخرى في النظام الشمسي — الكواكب القزمة، حزام الكويكبات، المذنبات، حزام كايبر، وسحابة أورت — قيد
-          الإضافة إلى الأطلس ضمن نفس بنية البيانات المستخدمة هنا.
-        </p>
       </div>
     </div>
   );

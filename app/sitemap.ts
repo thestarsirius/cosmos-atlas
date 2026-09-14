@@ -1,18 +1,21 @@
 import { MetadataRoute } from "next";
-import { planets } from "@/data/planets";
+import { allEntries, categoryRoute } from "@/data";
 
-const SITE_URL = "https://cosmos-atlas.vercel.app";
+const SITE_URL = "https://cosmos-atlas.pages.dev";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/solar-system", "/glossary", "/about", "/explore"].map((path) => ({
+  const staticRoutes = [
+    "", "/explore", "/solar-system", "/star-map", "/cosmic-scale",
+    "/timeline", "/glossary", "/about", "/discover"
+  ].map((path) => ({
     url: `${SITE_URL}${path}`,
     lastModified: new Date()
   }));
 
-  const planetRoutes = planets.map((p) => ({
-    url: `${SITE_URL}/solar-system/${p.slug}`,
+  const entryRoutes = allEntries.map((e) => ({
+    url: `${SITE_URL}/${categoryRoute[e.category]}/${e.slug}`,
     lastModified: new Date()
   }));
 
-  return [...staticRoutes, ...planetRoutes];
+  return [...staticRoutes, ...entryRoutes];
 }

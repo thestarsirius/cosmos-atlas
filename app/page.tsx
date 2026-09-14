@@ -1,151 +1,127 @@
+"use client";
+
 import Link from "next/link";
-import { planets } from "@/data/planets";
-import ObjectCard from "@/components/ObjectCard";
+import { motion } from "framer-motion";
+import DiscoveryCard from "@/components/DiscoveryCard";
+import DidYouKnow from "@/components/DidYouKnow";
 
-const journey = [
-  { labelAr: "الأرض", descAr: "نقطة انطلاقنا في الكون" },
-  { labelAr: "القمر", descAr: "أقرب جسم سماوي إلينا" },
-  { labelAr: "النظام الشمسي", descAr: "الشمس وثمانية كواكب" },
-  { labelAr: "النجوم القريبة", descAr: "جيراننا في المجرة" },
-  { labelAr: "مجرة درب التبانة", descAr: "موطننا المجري" },
-  { labelAr: "المجموعة المحلية", descAr: "مجرات تجاورنا" },
-  { labelAr: "عناقيد المجرات", descAr: "تجمعات مجرية ضخمة" },
-  { labelAr: "الشبكة الكونية", descAr: "أكبر البنى المعروفة" },
-  { labelAr: "الكون المرصود", descAr: "حدود ما نستطيع رؤيته" }
+const quickLaunch = [
+  { title: "Solar System", desc: "An interactive orbit view of the Sun and eight planets.", href: "/solar-system" },
+  { title: "Star Map", desc: "Click through notable stars visible from Earth.", href: "/star-map" },
+  { title: "Cosmic Scale", desc: "From a human being to the observable universe.", href: "/cosmic-scale" },
+  { title: "Timeline", desc: "The Big Bang to the present day.", href: "/timeline" }
 ];
 
-const exploreCategories = [
-  { labelAr: "الكواكب", href: "/solar-system" },
-  { labelAr: "النجوم", href: "/stars" },
-  { labelAr: "الأقمار", href: "/moons" },
-  { labelAr: "المجرات", href: "/galaxies" },
-  { labelAr: "السدم", href: "/nebulae" },
-  { labelAr: "الثقوب السوداء", href: "/black-holes" },
-  { labelAr: "الكواكب الخارجية", href: "/exoplanets" },
-  { labelAr: "الأبراج", href: "/constellations" },
-  { labelAr: "الظواهر الكونية", href: "/universe" },
-  { labelAr: "المهمات الفضائية", href: "/missions" }
-];
+const heroContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } }
+};
+
+const heroItem = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+};
 
 export default function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-16 sm:pt-24 pb-16">
-        <p className="font-mono text-xs text-faint tracking-wide">COSMOS</p>
-        <h1 className="font-kufi text-4xl sm:text-6xl text-ink mt-3 text-balance max-w-3xl">
-          أطلس الكون
-        </h1>
-        <p className="mt-5 text-lg text-mute max-w-xl leading-8">
-          رحلة معرفية من الأرض إلى أبعد حدود الكون المرصود.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/explore"
-            className="rounded bg-ember text-void px-5 py-3 text-sm font-medium hover:bg-ember/90 transition-colors"
+      <section className="relative min-h-[92vh] flex items-center justify-center px-4 sm:px-6 nebula-glow">
+        <motion.div
+          variants={heroContainer}
+          initial="hidden"
+          animate="show"
+          className="text-center max-w-2xl"
+        >
+          <motion.p variants={heroItem} className="text-xs font-mono uppercase tracking-[0.3em] text-faint">
+            An interactive atlas
+          </motion.p>
+          <motion.h1
+            variants={heroItem}
+            className="mt-5 font-display font-semibold text-5xl sm:text-7xl text-starlight text-balance"
           >
-            ابدأ الاستكشاف
-          </Link>
-          <Link
-            href="/random"
-            className="rounded border border-line px-5 py-3 text-sm text-ink hover:border-ember/50 transition-colors"
-          >
-            خذني إلى مكان ما في الكون
-          </Link>
-        </div>
-      </section>
-
-      {/* Cosmic journey */}
-      <section className="border-t border-line">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16">
-          <h2 className="font-kufi text-2xl text-ink">من الأرض إلى حدود الكون</h2>
-          <p className="mt-2 text-sm text-mute max-w-prose">
-            كل مستوى في هذه الرحلة يحتوي داخله كل ما قبله — أنت الآن على الأرض، التي هي جزء من النظام الشمسي، الذي
-            هو جزء من المجرة، وهكذا حتى حدود ما يمكن رصده.
-          </p>
-          <ol className="mt-8 grid gap-3 sm:grid-cols-3">
-            {journey.map((step, i) => (
-              <li key={step.labelAr} className="rounded border border-line bg-panel/40 p-4">
-                <span className="font-mono text-xs text-faint">{String(i + 1).padStart(2, "0")}</span>
-                <p className="font-kufi text-ink mt-1">{step.labelAr}</p>
-                <p className="text-xs text-mute mt-1">{step.descAr}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Explore categories */}
-      <section className="border-t border-line">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16">
-          <h2 className="font-kufi text-2xl text-ink">استكشف الكون</h2>
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {exploreCategories.map((cat) => (
-              <Link
-                key={cat.href}
-                href={cat.href}
-                className="rounded border border-line px-4 py-4 text-sm text-mute hover:text-ink hover:border-ember/50 transition-colors text-center"
-              >
-                {cat.labelAr}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Selected objects — Solar System, real data */}
-      <section className="border-t border-line">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16">
-          <div className="flex items-baseline justify-between">
-            <h2 className="font-kufi text-2xl text-ink">أجسام مختارة — النظام الشمسي</h2>
-            <Link href="/solar-system" className="text-sm text-ember hover:underline">
-              عرض الكل
+            COSMOS ATLAS
+          </motion.h1>
+          <motion.p variants={heroItem} className="mt-5 text-lg sm:text-xl text-mute">
+            Explore the universe. One world at a time.
+          </motion.p>
+          <motion.div variants={heroItem} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="#launch"
+              className="rounded-lg bg-purple px-6 py-3 text-sm font-medium text-starlight shadow-glow hover:bg-purple-soft transition-colors"
+            >
+              Begin Exploration
+            </a>
+            <Link
+              href="/explore"
+              className="rounded-lg border border-white/15 px-6 py-3 text-sm text-starlight hover:border-white/30 transition-colors"
+            >
+              Search the atlas
             </Link>
-          </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {planets.slice(0, 6).map((p) => (
-              <ObjectCard key={p.id} obj={p} href={`/solar-system/${p.slug}`} />
-            ))}
-          </div>
+          </motion.div>
+        </motion.div>
+
+        <a
+          href="#launch"
+          aria-label="Scroll to explore"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-faint hover:text-mute transition-colors"
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" className="animate-twinkle">
+            <path d="M4 7l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
+      </section>
+
+      {/* Cosmic Discovery */}
+      <section className="mx-auto max-w-4xl px-4 sm:px-6 py-16">
+        <DiscoveryCard />
+      </section>
+
+      {/* Quick launch */}
+      <section id="launch" className="mx-auto max-w-6xl px-4 sm:px-6 py-16 scroll-mt-20">
+        <h2 className="font-display text-2xl sm:text-3xl text-starlight">Start exploring</h2>
+        <p className="mt-2 text-mute max-w-prose">Four ways into the atlas — pick a starting point.</p>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          {quickLaunch.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group rounded-xl border border-white/10 bg-navy/40 p-6 hover:border-white/25 hover:bg-navy/60 transition-colors"
+            >
+              <h3 className="font-display text-lg text-starlight">{item.title}</h3>
+              <p className="mt-2 text-sm text-mute leading-6">{item.desc}</p>
+              <span className="mt-4 inline-flex text-sm text-stellar opacity-0 group-hover:opacity-100 transition-opacity">
+                Open →
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Explore categories teaser */}
+      <section className="mx-auto max-w-6xl px-4 sm:px-6 py-16">
+        <div className="flex items-baseline justify-between flex-wrap gap-2">
+          <h2 className="font-display text-2xl sm:text-3xl text-starlight">Explore by category</h2>
+          <Link href="/explore" className="text-sm text-stellar hover:underline">
+            View all
+          </Link>
+        </div>
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {["Planets", "Stars", "Galaxies", "Nebulae", "Moons", "Black Holes", "Asteroids", "Comets"].map((label) => (
+            <Link
+              key={label}
+              href="/explore"
+              className="rounded-lg border border-white/10 px-4 py-4 text-sm text-mute text-center hover:text-starlight hover:border-white/25 transition-colors"
+            >
+              {label}
+            </Link>
+          ))}
         </div>
       </section>
 
       {/* Did you know */}
-      <section className="border-t border-line">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16">
-          <h2 className="font-kufi text-2xl text-ink mb-8">هل تعلم؟</h2>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              "ضوء الشمس يستغرق نحو 8 دقائق ليصل إلى الأرض.",
-              "أوليمبوس مونس على المريخ يبلغ ارتفاعه نحو ثلاثة أضعاف جبل إيفرست.",
-              "المشتري أكبر من أن توضع كل الكواكب الأخرى بداخله تقريبًا من حيث الكتلة."
-            ].map((fact) => (
-              <div key={fact} className="rounded border border-ember/30 bg-ember/5 p-5">
-                <p className="text-sm text-ink leading-7">{fact}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Learn astronomy CTA */}
-      <section className="border-t border-line">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16">
-          <div className="rounded border border-line bg-panel/40 p-8 flex flex-wrap items-center justify-between gap-6">
-            <div>
-              <h2 className="font-kufi text-2xl text-ink">تعلّم الفلك خطوة بخطوة</h2>
-              <p className="mt-2 text-sm text-mute max-w-md">
-                مسارات تعليمية للمبتدئين والمتوسطين والمتقدمين، من أساسيات علم الفلك إلى الفيزياء الفلكية.
-              </p>
-            </div>
-            <Link
-              href="/academy"
-              className="rounded bg-ember text-void px-5 py-3 text-sm font-medium hover:bg-ember/90 transition-colors shrink-0"
-            >
-              ابدأ التعلم
-            </Link>
-          </div>
-        </div>
+      <section className="mx-auto max-w-4xl px-4 sm:px-6 py-16">
+        <DidYouKnow />
       </section>
     </div>
   );

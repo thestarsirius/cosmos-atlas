@@ -1,81 +1,68 @@
 export interface GlossaryTerm {
-  termAr: string;
-  termEn: string;
-  simpleAr: string;
-  deepAr: string;
+  term: string;
+  simple: string;
+  deep: string;
 }
 
 export const glossary: GlossaryTerm[] = [
   {
-    termAr: "القطر الأصغري",
-    termEn: "Perihelion",
-    simpleAr: "أقرب نقطة يصل إليها جسم في مداره من الشمس.",
-    deepAr: "نقطة الحضيض الشمسي في مدار إهليلجي، حيث تكون سرعة الجسم المداري عند أقصاها وفق قانون كبلر الثاني."
+    term: "Black Hole",
+    simple: "A region of space where gravity is so strong that nothing, not even light, can escape.",
+    deep: "Forms when massive stars collapse, or exists at the centers of most large galaxies as supermassive black holes. Detected indirectly through their effect on nearby matter and light, or directly via imaging the shadow they cast, as with Sagittarius A* and M87*."
   },
   {
-    termAr: "الأوج",
-    termEn: "Aphelion",
-    simpleAr: "أبعد نقطة يصل إليها جسم في مداره عن الشمس.",
-    deepAr: "نقطة الأوج الشمسي، حيث تكون سرعة الجسم المداري عند أدناها."
+    term: "Nebula",
+    simple: "A giant cloud of gas and dust in space, often where stars are born or where dying stars scatter their outer layers.",
+    deep: "Emission nebulae glow from ionizing radiation of nearby hot stars; reflection nebulae scatter starlight; planetary nebulae are the shed outer layers of dying sun-like stars; supernova remnants are the debris of exploded massive stars."
   },
   {
-    termAr: "الانزياح الأحمر",
-    termEn: "Redshift",
-    simpleAr: "تمدد موجات الضوء نحو الطرف الأحمر من الطيف عندما يبتعد مصدرها عنا.",
-    deepAr: "ظاهرة طيفية ناتجة عن تأثير دوبلر أو عن تمدد الكون نفسه، تُستخدم لقياس سرعة ابتعاد المجرات وتقدير المسافات الكونية الكبيرة."
+    term: "Supernova",
+    simple: "The explosive death of a star, briefly outshining an entire galaxy.",
+    deep: "Occurs either when a massive star's core collapses at the end of its life, or when a white dwarf in a binary system accretes enough mass to trigger runaway nuclear fusion. Supernovae forge and scatter heavy elements throughout the universe."
   },
   {
-    termAr: "الانزياح الأزرق",
-    termEn: "Blueshift",
-    simpleAr: "انضغاط موجات الضوء نحو الطرف الأزرق من الطيف عندما يقترب مصدرها منا.",
-    deepAr: "عكس الانزياح الأحمر؛ يحدث لأجسام تتحرك باتجاهنا، مثل مجرة أندروميدا التي تقترب من درب التبانة."
+    term: "Exoplanet",
+    simple: "A planet that orbits a star other than the Sun.",
+    deep: "Detected mainly via the transit method (a dip in starlight as a planet crosses in front of its star) or radial velocity (a star's slight wobble from a planet's gravitational tug). Thousands have been confirmed since the first detections in the 1990s."
   },
   {
-    termAr: "أفق الحدث",
-    termEn: "Event Horizon",
-    simpleAr: "الحد الذي بعده لا يمكن لأي شيء، ولا حتى الضوء، الإفلات من جاذبية الثقب الأسود.",
-    deepAr: "السطح الرياضي المحيط بالثقب الأسود حيث تتجاوز سرعة الإفلات سرعة الضوء؛ لا يُعد سطحًا ماديًا بل حدًا في نسيج الزمكان."
+    term: "Light-year",
+    simple: "The distance light travels in one year — used to measure vast distances in space.",
+    deep: "Equal to about 9.46 trillion kilometers. Because light takes time to travel, looking at distant objects means seeing them as they were in the past, not as they are now."
   },
   {
-    termAr: "قرص التراكم",
-    termEn: "Accretion Disk",
-    simpleAr: "قرص من الغاز والغبار الساخن يدور حول جسم كثيف مثل ثقب أسود قبل أن يسقط فيه.",
-    deepAr: "يتشكل القرص بسبب الزخم الزاوي للمادة المتساقطة؛ يسخن الاحتكاك الداخلي فيه المادة حتى تصدر إشعاعًا قويًا، وهو ما يجعل بعض الثقوب السوداء مرصودة بشكل غير مباشر."
+    term: "Red Giant",
+    simple: "A late-life stage of a sun-like star, where it swells enormously and cools, glowing red-orange.",
+    deep: "Occurs after a star exhausts the hydrogen fuel in its core; the core contracts and heats while the outer layers expand dramatically. The Sun will become a red giant in several billion years."
   },
   {
-    termAr: "التزيح",
-    termEn: "Parallax",
-    simpleAr: "تغيّر ظاهري في موقع نجم قريب عند رصده من نقطتين مختلفتين في مدار الأرض.",
-    deepAr: "أساس إحدى أهم طرق قياس مسافات النجوم القريبة: يُقاس زاوية التزيح الصغيرة جدًا، وتُحسب المسافة بالعلاقة العكسية معها (بالفرسخ الفلكي)."
+    term: "Neutron Star",
+    simple: "The extremely dense, collapsed core left behind after a massive star's supernova.",
+    deep: "Packs roughly the mass of the Sun into a sphere about 20 km across. Many neutron stars spin rapidly and emit beams of radiation, observed on Earth as pulsars."
   },
   {
-    termAr: "القدر الظاهري",
-    termEn: "Apparent Magnitude",
-    simpleAr: "مقياس لسطوع جسم سماوي كما يُرى من الأرض.",
-    deepAr: "مقياس لوغاريتمي عكسي — كلما قلّت القيمة زاد السطوع الظاهري. يتأثر بالمسافة الحقيقية والسطوع الجوهري للجسم معًا، خلافًا للقدر المطلق."
+    term: "Event Horizon",
+    simple: "The boundary around a black hole beyond which nothing can escape its gravity.",
+    deep: "Not a physical surface but a mathematical boundary in spacetime, marking where the escape velocity exceeds the speed of light."
   },
   {
-    termAr: "المنطقة الصالحة للحياة",
-    termEn: "Habitable Zone",
-    simpleAr: "المدى من المسافات حول نجم يمكن أن يوجد فيه الماء السائل على سطح كوكب صخري.",
-    deepAr: "تعتمد حدود هذه المنطقة على سطوع النجم وكتلته، وتُستخدم كمعيار أولي في تقييم قابلية الكواكب الخارجية لاستضافة الحياة، مع الأخذ بالاعتبار عوامل أخرى مثل الغلاف الجوي."
+    term: "Parallax",
+    simple: "The apparent shift in a nearby star's position when viewed from two different points in Earth's orbit.",
+    deep: "One of the most reliable methods for measuring distances to nearby stars; the tiny angle of shift is used, via trigonometry, to calculate distance in parsecs."
   },
   {
-    termAr: "المادة المظلمة",
-    termEn: "Dark Matter",
-    simpleAr: "مادة غير مرئية لا تصدر ولا تمتص ضوءًا، لكن تأثيرها الجاذبي محسوس في حركة المجرات.",
-    deepAr: "يُستدل على وجودها من منحنيات دوران المجرات، وعدسات الجاذبية، وتوزيع بنية الكون واسعة النطاق؛ طبيعتها الدقيقة لا تزال من أهم الأسئلة المفتوحة في الفيزياء الفلكية."
+    term: "Redshift",
+    simple: "The stretching of light toward longer, redder wavelengths as its source moves away from us.",
+    deep: "Used to measure how fast galaxies are receding and provides key evidence for the expansion of the universe, alongside other independent lines of evidence."
   },
   {
-    termAr: "الطاقة المظلمة",
-    termEn: "Dark Energy",
-    simpleAr: "قوة أو خاصية غير معروفة تسبب تسارع تمدد الكون.",
-    deepAr: "استُنتج وجودها من رصد المستعرات الأعظم من النوع Ia البعيدة، والتي أظهرت أن تمدد الكون يتسارع بدلًا من أن يتباطأ كما كان متوقعًا من الجاذبية وحدها."
+    term: "Habitable Zone",
+    simple: "The range of distances from a star where a planet could have liquid water on its surface.",
+    deep: "Depends on a star's brightness and temperature. It's a useful first filter for identifying potentially life-friendly exoplanets, though atmosphere and other factors matter too."
   },
   {
-    termAr: "الإشعاع الخلفي الكوني الميكروي",
-    termEn: "Cosmic Microwave Background",
-    simpleAr: "توهج خافت من الإشعاع يملأ الكون بأكمله، وهو بقايا حرارة من مراحل الكون المبكرة.",
-    deepAr: "انبعث هذا الإشعاع عندما أصبح الكون شفافًا للضوء لأول مرة، بعد نحو 380 ألف سنة من الانفجار العظيم، ويُعد أحد أقوى الأدلة الرصدية على نموذج الانفجار العظيم."
+    term: "Dark Matter",
+    simple: "An invisible form of matter that doesn't emit or absorb light, but whose gravity shapes galaxies.",
+    deep: "Inferred from galaxy rotation curves, gravitational lensing, and the large-scale structure of the universe. Its exact nature remains one of the biggest open questions in physics."
   }
 ];
