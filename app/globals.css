@@ -10,6 +10,21 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Arabic typography: distinct display + body faces, not a shrunken Latin font */
+html[dir="rtl"] body {
+  font-family: "IBM Plex Sans Arabic", sans-serif;
+}
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] .font-display {
+  font-family: "Noto Kufi Arabic", sans-serif;
+}
+html[dir="rtl"] .font-mono {
+  font-family: "IBM Plex Sans Arabic", sans-serif;
+  letter-spacing: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -32,7 +47,6 @@ body {
   border-radius: 2px;
 }
 
-/* soft nebula wash — used sparingly behind hero content only */
 .nebula-glow {
   background:
     radial-gradient(ellipse 60% 40% at 30% 20%, rgba(108, 79, 209, 0.25), transparent 60%),

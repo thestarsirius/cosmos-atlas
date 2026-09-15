@@ -1,4 +1,4 @@
-import { CosmicEntry } from "./types";
+import { CosmicEntry, ObjectCategory } from "./types";
 import { planets } from "./planets";
 import { stars } from "./stars";
 import { galaxies } from "./galaxies";
@@ -9,7 +9,6 @@ import { asteroids } from "./asteroids";
 import { comets } from "./comets";
 
 // Single index every explore/search/filter/discovery feature reads from.
-// Adding a new category file and listing it here is the only wiring needed.
 export const allEntries: CosmicEntry[] = [
   ...planets,
   ...stars,
@@ -21,18 +20,20 @@ export const allEntries: CosmicEntry[] = [
   ...comets
 ];
 
-export const categoryLabels: Record<CosmicEntry["category"], string> = {
-  planet: "Planet",
-  star: "Star",
-  galaxy: "Galaxy",
-  nebula: "Nebula",
-  moon: "Moon",
-  "black-hole": "Black Hole",
-  asteroid: "Asteroid",
-  comet: "Comet"
+// Maps each category to the UI dictionary key holding its bilingual label
+// (see data/i18n.ts) — components call t(categoryLabelKey[cat]).
+export const categoryLabelKey: Record<ObjectCategory, "catPlanet" | "catStar" | "catGalaxy" | "catNebula" | "catMoon" | "catBlackHole" | "catAsteroid" | "catComet"> = {
+  planet: "catPlanet",
+  star: "catStar",
+  galaxy: "catGalaxy",
+  nebula: "catNebula",
+  moon: "catMoon",
+  "black-hole": "catBlackHole",
+  asteroid: "catAsteroid",
+  comet: "catComet"
 };
 
-export const categoryRoute: Record<CosmicEntry["category"], string> = {
+export const categoryRoute: Record<ObjectCategory, string> = {
   planet: "solar-system",
   star: "explore/star",
   galaxy: "explore/galaxy",

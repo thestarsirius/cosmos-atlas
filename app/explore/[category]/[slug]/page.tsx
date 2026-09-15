@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { allEntries, categoryLabels } from "@/data";
+import { allEntries } from "@/data";
 import { CosmicEntry } from "@/data/types";
-import EntryDetail from "@/components/EntryDetail";
+import EntryClient from "./EntryClient";
 
 export function generateStaticParams() {
   return allEntries
@@ -23,8 +22,8 @@ export async function generateMetadata({
   const entry = findEntry(category, slug);
   if (!entry) return {};
   return {
-    title: entry.name,
-    description: entry.summary
+    title: entry.name.en,
+    description: entry.summary.en
   };
 }
 
@@ -34,18 +33,5 @@ export default async function CategoryEntryPage({
   params: Promise<{ category: string; slug: string }>;
 }) {
   const { category, slug } = await params;
-  const entry = findEntry(category, slug);
-  if (!entry) notFound();
-
-  return (
-    <EntryDetail
-      entry={entry}
-      breadcrumbTrail={[
-        { label: "Home", href: "/" },
-        { label: "Explore", href: "/explore" },
-        { label: categoryLabels[entry.category], href: `/explore?category=${entry.category}` },
-        { label: entry.name }
-      ]}
-    />
-  );
+  return <EntryClient category={category} slug={slug} />;
 }

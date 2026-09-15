@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CosmicEntry } from "@/data/types";
-import { categoryLabels } from "@/data";
+import { Lang } from "@/data/i18n";
 import AnimatedStat from "./AnimatedStat";
 
 export function Breadcrumbs({ items }: { items: { label: string; href?: string }[] }) {
@@ -16,7 +16,7 @@ export function Breadcrumbs({ items }: { items: { label: string; href?: string }
             ) : (
               <span className="text-mute">{item.label}</span>
             )}
-            {i < items.length - 1 && <span aria-hidden="true">→</span>}
+            {i < items.length - 1 && <span aria-hidden="true" className="rtl:-scale-x-100">→</span>}
           </li>
         ))}
       </ol>
@@ -24,7 +24,23 @@ export function Breadcrumbs({ items }: { items: { label: string; href?: string }
   );
 }
 
-export default function EntryDetail({ entry, breadcrumbTrail }: { entry: CosmicEntry; breadcrumbTrail: { label: string; href?: string }[] }) {
+export default function EntryDetail({
+  entry,
+  lang,
+  categoryLabel,
+  breadcrumbTrail,
+  didYouKnowLabel,
+  sourceLabel,
+  visitSourceLabel
+}: {
+  entry: CosmicEntry;
+  lang: Lang;
+  categoryLabel: string;
+  breadcrumbTrail: { label: string; href?: string }[];
+  didYouKnowLabel: string;
+  sourceLabel: string;
+  visitSourceLabel: string;
+}) {
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 pt-28 pb-16">
       <Breadcrumbs items={breadcrumbTrail} />
@@ -36,32 +52,32 @@ export default function EntryDetail({ entry, breadcrumbTrail }: { entry: CosmicE
             style={{ background: entry.colorHex, boxShadow: `0 0 20px ${entry.colorHex}` }}
             aria-hidden="true"
           />
-          <span className="text-xs font-mono uppercase tracking-wide text-faint">{categoryLabels[entry.category]}</span>
+          <span className="text-xs font-mono uppercase tracking-wide text-faint">{categoryLabel}</span>
         </div>
-        <h1 className="mt-2 font-display text-4xl sm:text-5xl text-starlight text-balance">{entry.name}</h1>
-        <p className="mt-3 text-lg text-mute">{entry.tagline}</p>
+        <h1 className="mt-2 font-display text-4xl sm:text-5xl text-starlight text-balance">{entry.name[lang]}</h1>
+        <p className="mt-3 text-lg text-mute">{entry.tagline[lang]}</p>
       </header>
 
       <section className="mt-10">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {entry.stats.map((stat, i) => (
-            <AnimatedStat key={stat.label} stat={stat} index={i} />
+            <AnimatedStat key={stat.label.en} stat={stat} lang={lang} index={i} />
           ))}
         </div>
       </section>
 
       <section className="mt-10 space-y-4">
-        <p className="text-mute leading-8">{entry.summary}</p>
-        <p className="text-mute leading-8">{entry.deepDive}</p>
+        <p className="text-mute leading-8">{entry.summary[lang]}</p>
+        <p className="text-mute leading-8">{entry.deepDive[lang]}</p>
       </section>
 
       {entry.facts.length > 0 && (
         <section className="mt-10">
-          <h2 className="font-display text-lg text-starlight mb-4">Did you know?</h2>
+          <h2 className="font-display text-lg text-starlight mb-4">{didYouKnowLabel}</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {entry.facts.map((f) => (
-              <div key={f} className="rounded-lg border border-purple/30 bg-purple/10 p-4">
-                <p className="text-sm text-starlight leading-6">{f}</p>
+              <div key={f.en} className="rounded-lg border border-purple/30 bg-purple/10 p-4">
+                <p className="text-sm text-starlight leading-6">{f[lang]}</p>
               </div>
             ))}
           </div>
@@ -69,9 +85,9 @@ export default function EntryDetail({ entry, breadcrumbTrail }: { entry: CosmicE
       )}
 
       <section className="mt-10 border-t border-white/10 pt-6 flex items-center justify-between flex-wrap gap-2">
-        <p className="text-sm text-faint">Source: {entry.sourceName}</p>
+        <p className="text-sm text-faint">{sourceLabel}: {entry.sourceName}</p>
         <a href={entry.sourceUrl} target="_blank" rel="noreferrer noopener" className="text-sm text-stellar hover:underline">
-          Visit source
+          {visitSourceLabel}
         </a>
       </section>
     </div>

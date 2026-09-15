@@ -1,6 +1,26 @@
 # Cosmos Atlas
 
-An interactive atlas of the universe. Explore the universe — one world at a time.
+An interactive, **bilingual (Arabic/English)** atlas of the universe. Explore the universe — one world at a time. / استكشف الكون، عالمًا تلو الآخر.
+
+## Bilingual architecture
+
+- **`data/i18n.ts`** — every static UI string (nav, buttons, labels, footer, empty states) lives in one `UI.en` / `UI.ar` dictionary. Components call `t('key')`.
+- **`lib/LanguageContext.tsx`** — a client React context (`LanguageProvider` / `useLanguage()`) holding the active language, persisted to `localStorage`, and applying `lang`/`dir` to `<html>` after mount (so the statically-exported first paint is always English/LTR, then the visitor's saved or browser-detected language applies instantly — no flash of wrong layout, no hydration mismatch).
+- **Data files** (`data/planets.ts`, `stars.ts`, `galaxies.ts`, `nebulae.ts`, `moons.ts`, `blackholes.ts`, `asteroids.ts`, `comets.ts`, `glossary.ts`, `facts.ts`) — every visible string (`name`, `tagline`, `summary`, `deepDive`, `stats[].label/unit`, `facts[]`) is a `{ en, ar }` pair (`Bilingual` type), not a plain string. Nothing is English-only.
+- **RTL/LTR** — `<html dir="rtl">` for Arabic flips layout automatically via Tailwind's logical-property utilities (`ms-*`, `ps-*`, `start-*`, `end-*`, `border-s`) used throughout instead of hardcoded `left`/`right`/`ml`/`mr`. Arabic renders in Noto Kufi Arabic (headings) / IBM Plex Sans Arabic (body); English in Space Grotesk / Inter.
+- **Language switcher** — `AR | EN` pill in the navbar (desktop and mobile), calls `setLang()`, which updates state, `localStorage`, and `<html lang/dir>` immediately.
+- **Developer credit** — bottom of the footer, centered, small: "Developed by Shahad Ghazwani" (EN) / "تطوير: شهد غزواني" (AR), switching automatically with `t('devCredit')`.
+
+### Next.js 15 + Client Components + bilingual data
+
+Since the active language is a `localStorage`-backed client-only value, any page that renders translatable content is a Client Component (`"use client"`) using `useLanguage()`. This is incompatible with `generateStaticParams`/`generateMetadata`, which must run in a Server Component. Dynamic routes are therefore split in two:
+
+```
+app/solar-system/[slug]/page.tsx        ← Server Component: generateStaticParams, generateMetadata, awaits the params Promise (Next.js 15), renders...
+app/solar-system/[slug]/PlanetClient.tsx ← Client Component: useLanguage(), renders the bilingual UI
+```
+
+The same split is used for `app/explore/[category]/[slug]/`. Both server `page.tsx` files type `params` as `Promise<{...}>` and `await` it — the Next.js 15 API this project was specifically built to satisfy.
 
 ## What's here
 

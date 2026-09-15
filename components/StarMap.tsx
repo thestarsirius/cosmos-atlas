@@ -4,15 +4,16 @@ import { useState } from "react";
 import Link from "next/link";
 import { stars } from "@/data/stars";
 import { hrefFor } from "./ObjectCard";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function StarMap() {
+  const { lang, t } = useLanguage();
   const [selectedId, setSelectedId] = useState<string | null>(stars[0]?.id ?? null);
   const selected = stars.find((s) => s.id === selectedId) ?? null;
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
       <div className="relative h-[420px] sm:h-[520px] rounded-xl border border-white/10 bg-navy/30 overflow-hidden">
-        {/* faint decorative background stars, non-interactive */}
         <div className="absolute inset-0" aria-hidden="true">
           {Array.from({ length: 60 }).map((_, i) => (
             <span
@@ -43,7 +44,7 @@ export default function StarMap() {
               background: star.colorHex,
               boxShadow: `0 0 ${selectedId === star.id ? 24 : 14}px ${star.colorHex}`
             }}
-            aria-label={`${star.name} — show details`}
+            aria-label={star.name[lang]}
             aria-pressed={selectedId === star.id}
           />
         ))}
@@ -57,24 +58,24 @@ export default function StarMap() {
               style={{ background: selected.colorHex, boxShadow: `0 0 14px ${selected.colorHex}` }}
               aria-hidden="true"
             />
-            <h2 className="font-display text-xl text-starlight">{selected.name}</h2>
-            <p className="mt-1 text-sm text-mute">{selected.tagline}</p>
+            <h2 className="font-display text-xl text-starlight">{selected.name[lang]}</h2>
+            <p className="mt-1 text-sm text-mute">{selected.tagline[lang]}</p>
             <dl className="mt-4 space-y-2">
               {selected.stats.map((s) => (
-                <div key={s.label} className="flex justify-between text-sm">
-                  <dt className="text-faint">{s.label}</dt>
+                <div key={s.label.en} className="flex justify-between text-sm">
+                  <dt className="text-faint">{s.label[lang]}</dt>
                   <dd className="text-starlight">
-                    {s.value} {s.unit}
+                    {s.value} {s.unit[lang]}
                   </dd>
                 </div>
               ))}
             </dl>
             <Link href={hrefFor(selected)} className="mt-5 inline-flex text-sm text-stellar hover:underline">
-              Full details →
+              {t("fullDetails")}
             </Link>
           </div>
         ) : (
-          <p className="text-mute text-sm">Select a star to see details.</p>
+          <p className="text-mute text-sm">{t("selectStar")}</p>
         )}
       </div>
     </div>

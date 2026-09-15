@@ -1,148 +1,175 @@
 import { PlanetEntry } from "./types";
 
 const NASA_SOURCE = { sourceName: "NASA Planetary Fact Sheets", sourceUrl: "https://nssdc.gsfc.nasa.gov/planetary/factsheet/" };
+const km = { en: "km", ar: "كم" };
+const days = { en: "Earth days", ar: "يومًا أرضيًا" };
+const hours = { en: "hours", ar: "ساعة" };
+const years = { en: "Earth years", ar: "سنة أرضية" };
+const celsius = { en: "°C", ar: "°م" };
 
-// orbitRadiusPx / orbitPeriodSec / relativeSize are for the interactive
-// orbit view only — compressed to fit a screen and to keep outer planets
-// from taking a minute to complete a visible loop. They are NOT to scale;
-// the planet detail pages carry the real, sourced numbers.
 export const planets: PlanetEntry[] = [
   {
-    id: "mercury", slug: "mercury", name: "Mercury", category: "planet",
-    tagline: "The swift, scorched innermost world",
-    summary: "Mercury is the smallest planet and the closest to the Sun, with almost no atmosphere to soften its extremes.",
-    deepDive: "With no meaningful atmosphere to trap heat, Mercury's surface swings from about 427°C in direct sunlight to -173°C in shadow. It rotates so slowly (58.6 Earth days) relative to its short year (88 days) that a single Mercury solar day lasts about 176 Earth days.",
+    id: "mercury", slug: "mercury", category: "planet",
+    name: { en: "Mercury", ar: "عطارد" },
+    tagline: { en: "The swift, scorched innermost world", ar: "العالم السريع المحترق، الأقرب إلى الشمس" },
+    summary: { en: "Mercury is the smallest planet and the closest to the Sun, with almost no atmosphere to soften its extremes.", ar: "عطارد أصغر الكواكب وأقربها إلى الشمس، وله غلاف جوي شبه معدوم لا يخفف من تطرفه الحراري." },
+    deepDive: { en: "With no meaningful atmosphere to trap heat, Mercury's surface swings from about 427°C in direct sunlight to -173°C in shadow. It rotates so slowly (58.6 Earth days) relative to its short year (88 days) that a single Mercury solar day lasts about 176 Earth days.", ar: "لغياب غلاف جوي يحبس الحرارة، تتراوح حرارة سطح عطارد بين نحو 427°م في ضوء الشمس المباشر و-173°م في الظل. يدور حول نفسه ببطء شديد (58.6 يومًا أرضيًا) مقارنة بسنته القصيرة (88 يومًا)، حتى إن اليوم الشمسي الواحد عليه يستغرق نحو 176 يومًا أرضيًا." },
     stats: [
-      { label: "Diameter", value: "4,879", unit: "km", approximate: true },
-      { label: "Distance from Sun", value: "57.9M", unit: "km (0.39 AU)", approximate: true },
-      { label: "Day length", value: "58.6", unit: "Earth days" },
-      { label: "Year length", value: "88", unit: "Earth days" },
-      { label: "Moons", value: "0", unit: "" },
-      { label: "Surface temp", value: "-173 to 427", unit: "°C", approximate: true }
+      { label: { en: "Diameter", ar: "القطر" }, value: "4,879", unit: km, approximate: true },
+      { label: { en: "Distance from Sun", ar: "البعد عن الشمس" }, value: "57.9M (0.39 AU)", unit: km, approximate: true },
+      { label: { en: "Day length", ar: "مدة الدوران حول نفسه" }, value: "58.6", unit: days },
+      { label: { en: "Year length", ar: "مدة الدوران حول الشمس" }, value: "88", unit: days },
+      { label: { en: "Moons", ar: "الأقمار" }, value: "0", unit: { en: "", ar: "" } },
+      { label: { en: "Surface temp", ar: "حرارة السطح" }, value: "-173 to 427", unit: celsius, approximate: true }
     ],
-    facts: ["A year on Mercury is shorter than its own day.", "Mercury has the most eccentric (least circular) orbit of any planet."],
+    facts: [
+      { en: "A year on Mercury is shorter than its own day.", ar: "سنة كاملة على عطارد أقصر من يومه الشمسي الواحد." },
+      { en: "Mercury has the most eccentric (least circular) orbit of any planet.", ar: "لعطارد أكثر المدارات اهليلجية (أقلها استدارة) بين الكواكب." }
+    ],
     colorHex: "#B8AFA6",
-    orbitRadiusPx: 90, orbitPeriodSec: 8, relativeSize: 5,
+    orbitRadiusPx: 70, orbitPeriodSec: 8, relativeSize: 6,
     ...NASA_SOURCE
   },
   {
-    id: "venus", slug: "venus", name: "Venus", category: "planet",
-    tagline: "Earth's twin in size, hell in climate",
-    summary: "Venus is blanketed in thick carbon-dioxide clouds that trap heat so effectively it's the hottest planet in the solar system.",
-    deepDive: "A runaway greenhouse effect from a CO2-rich atmosphere pushes Venus's surface temperature above 460°C — hotter than Mercury despite being farther from the Sun. Venus also rotates backward relative to most planets, so its sun rises in the west.",
+    id: "venus", slug: "venus", category: "planet",
+    name: { en: "Venus", ar: "الزهرة" },
+    tagline: { en: "Earth's twin in size, hell in climate", ar: "توأم الأرض في الحجم، جحيم في المناخ" },
+    summary: { en: "Venus is blanketed in thick carbon-dioxide clouds that trap heat so effectively it's the hottest planet in the solar system.", ar: "يكتنف الزهرة غلاف كثيف من ثاني أكسيد الكربون يحبس الحرارة بفعالية، فيجعله أشد كواكب النظام الشمسي حرارة." },
+    deepDive: { en: "A runaway greenhouse effect from a CO2-rich atmosphere pushes Venus's surface temperature above 460°C — hotter than Mercury despite being farther from the Sun. Venus also rotates backward relative to most planets, so its sun rises in the west.", ar: "يدفع تأثير الاحتباس الحراري الجامح الناتج عن غلاف غني بثاني أكسيد الكربون حرارة سطح الزهرة إلى ما فوق 460°م — أشد حرارة من عطارد رغم بُعده الأكبر عن الشمس. كما يدور الزهرة بعكس اتجاه معظم الكواكب، فتشرق شمسه من الغرب." },
     stats: [
-      { label: "Diameter", value: "12,104", unit: "km", approximate: true },
-      { label: "Distance from Sun", value: "108.2M", unit: "km (0.72 AU)", approximate: true },
-      { label: "Day length", value: "243", unit: "Earth days (retrograde)" },
-      { label: "Year length", value: "224.7", unit: "Earth days" },
-      { label: "Moons", value: "0", unit: "" },
-      { label: "Surface temp", value: "≈ 464", unit: "°C", approximate: true }
+      { label: { en: "Diameter", ar: "القطر" }, value: "12,104", unit: km, approximate: true },
+      { label: { en: "Distance from Sun", ar: "البعد عن الشمس" }, value: "108.2M (0.72 AU)", unit: km, approximate: true },
+      { label: { en: "Day length", ar: "مدة الدوران حول نفسه" }, value: "243 (retrograde)", unit: days },
+      { label: { en: "Year length", ar: "مدة الدوران حول الشمس" }, value: "224.7", unit: days },
+      { label: { en: "Moons", ar: "الأقمار" }, value: "0", unit: { en: "", ar: "" } },
+      { label: { en: "Surface temp", ar: "حرارة السطح" }, value: "≈ 464", unit: celsius, approximate: true }
     ],
-    facts: ["A day on Venus is longer than its year.", "Venus's surface pressure is about 90 times Earth's."],
+    facts: [
+      { en: "A day on Venus is longer than its year.", ar: "يوم واحد على الزهرة أطول من سنته الكاملة." },
+      { en: "Venus's surface pressure is about 90 times Earth's.", ar: "يبلغ ضغط سطح الزهرة نحو 90 ضعف ضغط سطح الأرض." }
+    ],
     colorHex: "#E8C170",
-    orbitRadiusPx: 130, orbitPeriodSec: 13, relativeSize: 7,
+    orbitRadiusPx: 100, orbitPeriodSec: 13, relativeSize: 8,
     ...NASA_SOURCE
   },
   {
-    id: "earth", slug: "earth", name: "Earth", category: "planet",
-    tagline: "The only known home for life",
-    summary: "Earth is the third planet from the Sun and the only world we know of with liquid water on the surface and life.",
-    deepDive: "A nitrogen-oxygen atmosphere shields the surface from harmful radiation, and a magnetic field generated by the molten outer core deflects the solar wind. Roughly 71% of the surface is covered by ocean.",
+    id: "earth", slug: "earth", category: "planet",
+    name: { en: "Earth", ar: "الأرض" },
+    tagline: { en: "The only known home for life", ar: "الموطن الوحيد المعروف للحياة" },
+    summary: { en: "Earth is the third planet from the Sun and the only world we know of with liquid water on the surface and life.", ar: "الأرض هي الكوكب الثالث من الشمس، والعالم الوحيد المعروف الذي يحتضن ماءً سائلًا على سطحه وحياة." },
+    deepDive: { en: "A nitrogen-oxygen atmosphere shields the surface from harmful radiation, and a magnetic field generated by the molten outer core deflects the solar wind. Roughly 71% of the surface is covered by ocean.", ar: "يحمي الغلاف الجوي الغني بالنيتروجين والأكسجين السطح من الإشعاع الضار، ويصدّ المجال المغناطيسي الناتج عن اللب الخارجي المنصهر الرياح الشمسية. يغطي المحيط نحو 71٪ من سطح الأرض." },
     stats: [
-      { label: "Diameter", value: "12,742", unit: "km", approximate: true },
-      { label: "Distance from Sun", value: "149.6M", unit: "km (1.0 AU)", approximate: true },
-      { label: "Day length", value: "23.9", unit: "hours" },
-      { label: "Year length", value: "365.25", unit: "days" },
-      { label: "Moons", value: "1", unit: "(the Moon)" },
-      { label: "Avg. surface temp", value: "≈ 15", unit: "°C", approximate: true }
+      { label: { en: "Diameter", ar: "القطر" }, value: "12,742", unit: km, approximate: true },
+      { label: { en: "Distance from Sun", ar: "البعد عن الشمس" }, value: "149.6M (1.0 AU)", unit: km, approximate: true },
+      { label: { en: "Day length", ar: "مدة الدوران حول نفسها" }, value: "23.9", unit: hours },
+      { label: { en: "Year length", ar: "مدة الدوران حول الشمس" }, value: "365.25", unit: { en: "days", ar: "يومًا" } },
+      { label: { en: "Moons", ar: "الأقمار" }, value: "1", unit: { en: "(the Moon)", ar: "(القمر)" } },
+      { label: { en: "Avg. surface temp", ar: "متوسط حرارة السطح" }, value: "≈ 15", unit: celsius, approximate: true }
     ],
-    facts: ["Earth isn't a perfect sphere — it bulges slightly at the equator from its own rotation."],
+    facts: [
+      { en: "Earth isn't a perfect sphere — it bulges slightly at the equator from its own rotation.", ar: "الأرض ليست كروية تمامًا؛ فهي منبعجة قليلًا عند خط الاستواء بسبب دورانها حول نفسها." }
+    ],
     colorHex: "#4E8FE0",
-    orbitRadiusPx: 170, orbitPeriodSec: 18, relativeSize: 7,
+    orbitRadiusPx: 130, orbitPeriodSec: 18, relativeSize: 8,
     ...NASA_SOURCE
   },
   {
-    id: "mars", slug: "mars", name: "Mars", category: "planet",
-    tagline: "The Red Planet, most explored world beyond Earth",
-    summary: "Mars gets its rust-red color from iron oxide covering its surface, and hosts the largest known volcano in the solar system.",
-    deepDive: "Olympus Mons rises about three times the height of Mount Everest, and Valles Marineris is a canyon system long enough to stretch across the continental United States. Strong geological evidence points to liquid water having flowed on Mars in its distant past.",
+    id: "mars", slug: "mars", category: "planet",
+    name: { en: "Mars", ar: "المريخ" },
+    tagline: { en: "The Red Planet, most explored world beyond Earth", ar: "الكوكب الأحمر، أكثر عالم استُكشف خارج الأرض" },
+    summary: { en: "Mars gets its rust-red color from iron oxide covering its surface, and hosts the largest known volcano in the solar system.", ar: "يستمد المريخ لونه الأحمر الصدئي من أكسيد الحديد المغطي لسطحه، ويضم أكبر بركان معروف في النظام الشمسي." },
+    deepDive: { en: "Olympus Mons rises about three times the height of Mount Everest, and Valles Marineris is a canyon system long enough to stretch across the continental United States. Strong geological evidence points to liquid water having flowed on Mars in its distant past.", ar: "يرتفع بركان أوليمبوس مونس نحو ثلاثة أضعاف ارتفاع جبل إيفرست، ويمتد نظام أخاديد فاليس مارينيريس بطول يعادل امتداد الولايات المتحدة القارية. تشير أدلة جيولوجية قوية إلى تدفق ماء سائل على سطح المريخ في ماضيه البعيد." },
     stats: [
-      { label: "Diameter", value: "6,779", unit: "km", approximate: true },
-      { label: "Distance from Sun", value: "227.9M", unit: "km (1.52 AU)", approximate: true },
-      { label: "Day length", value: "24.6", unit: "hours" },
-      { label: "Year length", value: "687", unit: "Earth days" },
-      { label: "Moons", value: "2", unit: "(Phobos & Deimos)" },
-      { label: "Avg. surface temp", value: "≈ -63", unit: "°C", approximate: true }
+      { label: { en: "Diameter", ar: "القطر" }, value: "6,779", unit: km, approximate: true },
+      { label: { en: "Distance from Sun", ar: "البعد عن الشمس" }, value: "227.9M (1.52 AU)", unit: km, approximate: true },
+      { label: { en: "Day length", ar: "مدة الدوران حول نفسه" }, value: "24.6", unit: hours },
+      { label: { en: "Year length", ar: "مدة الدوران حول الشمس" }, value: "687", unit: days },
+      { label: { en: "Moons", ar: "الأقمار" }, value: "2", unit: { en: "(Phobos & Deimos)", ar: "(فوبوس وديموس)" } },
+      { label: { en: "Avg. surface temp", ar: "متوسط حرارة السطح" }, value: "≈ -63", unit: celsius, approximate: true }
     ],
-    facts: ["Olympus Mons is roughly three times the height of Mount Everest."],
+    facts: [
+      { en: "Olympus Mons is roughly three times the height of Mount Everest.", ar: "يبلغ ارتفاع أوليمبوس مونس نحو ثلاثة أضعاف ارتفاع جبل إيفرست." }
+    ],
     colorHex: "#C1573A",
-    orbitRadiusPx: 210, orbitPeriodSec: 24, relativeSize: 6,
+    orbitRadiusPx: 160, orbitPeriodSec: 24, relativeSize: 7,
     ...NASA_SOURCE
   },
   {
-    id: "jupiter", slug: "jupiter", name: "Jupiter", category: "planet",
-    tagline: "The solar system's giant",
-    summary: "Jupiter is by far the largest planet — a gas giant with a storm, the Great Red Spot, that's raged for centuries at least.",
-    deepDive: "Jupiter is made mostly of hydrogen and helium and has no true solid surface. Its Great Red Spot is a storm larger than Earth itself. Jupiter's powerful magnetic field and dozens of moons — including the four large Galilean moons discovered in 1610 — make it effectively a miniature planetary system of its own.",
+    id: "jupiter", slug: "jupiter", category: "planet",
+    name: { en: "Jupiter", ar: "المشتري" },
+    tagline: { en: "The solar system's giant", ar: "عملاق النظام الشمسي" },
+    summary: { en: "Jupiter is by far the largest planet — a gas giant with a storm, the Great Red Spot, that's raged for centuries at least.", ar: "المشتري أكبر الكواكب بفارق كبير — عملاق غازي تعصف فيه عاصفة، البقعة الحمراء الكبرى، مستمرة منذ قرون على الأقل." },
+    deepDive: { en: "Jupiter is made mostly of hydrogen and helium and has no true solid surface. Its Great Red Spot is a storm larger than Earth itself. Jupiter's powerful magnetic field and dozens of moons — including the four large Galilean moons discovered in 1610 — make it effectively a miniature planetary system of its own.", ar: "يتكوّن المشتري أساسًا من الهيدروجين والهيليوم، ولا يملك سطحًا صلبًا حقيقيًا. البقعة الحمراء الكبرى عاصفة أكبر من الأرض نفسها. مجاله المغناطيسي القوي وعشرات أقماره — ومن بينها أقمار غاليليو الأربعة الكبرى المكتشفة عام 1610 — تجعله أشبه بنظام كوكبي مصغّر قائم بذاته." },
     stats: [
-      { label: "Diameter", value: "139,820", unit: "km", approximate: true },
-      { label: "Distance from Sun", value: "778.5M", unit: "km (5.2 AU)", approximate: true },
-      { label: "Day length", value: "≈ 9.9", unit: "hours", approximate: true },
-      { label: "Year length", value: "≈ 11.9", unit: "Earth years", approximate: true },
-      { label: "Known moons", value: "90+", unit: "", approximate: true }
+      { label: { en: "Diameter", ar: "القطر" }, value: "139,820", unit: km, approximate: true },
+      { label: { en: "Distance from Sun", ar: "البعد عن الشمس" }, value: "778.5M (5.2 AU)", unit: km, approximate: true },
+      { label: { en: "Day length", ar: "مدة الدوران حول نفسه" }, value: "≈ 9.9", unit: hours, approximate: true },
+      { label: { en: "Year length", ar: "مدة الدوران حول الشمس" }, value: "≈ 11.9", unit: years, approximate: true },
+      { label: { en: "Known moons", ar: "الأقمار المعروفة" }, value: "90+", unit: { en: "", ar: "قمرًا" }, approximate: true }
     ],
-    facts: ["The Great Red Spot is a storm bigger than the entire Earth."],
+    facts: [
+      { en: "The Great Red Spot is a storm bigger than the entire Earth.", ar: "البقعة الحمراء الكبرى عاصفة أكبر من كوكب الأرض بأكمله." }
+    ],
     colorHex: "#D9A066",
-    orbitRadiusPx: 270, orbitPeriodSec: 34, relativeSize: 14,
+    orbitRadiusPx: 205, orbitPeriodSec: 34, relativeSize: 16,
     ...NASA_SOURCE
   },
   {
-    id: "saturn", slug: "saturn", name: "Saturn", category: "planet",
-    tagline: "The ringed jewel of the solar system",
-    summary: "Saturn's spectacular ring system, made mostly of ice and rock particles, makes it one of the most recognizable objects in the sky.",
-    deepDive: "Saturn is less dense than water — in principle, it would float in an ocean big enough to hold it. Its largest moon, Titan, has a thick atmosphere and lakes of liquid methane, making it one of the most Earth-like worlds in terms of surface processes, despite the extreme cold.",
+    id: "saturn", slug: "saturn", category: "planet",
+    name: { en: "Saturn", ar: "زحل" },
+    tagline: { en: "The ringed jewel of the solar system", ar: "جوهرة النظام الشمسي المحلّقة بالحلقات" },
+    summary: { en: "Saturn's spectacular ring system, made mostly of ice and rock particles, makes it one of the most recognizable objects in the sky.", ar: "يجعل نظام حلقات زحل المذهل، المكوّن أساسًا من جسيمات جليدية وصخرية، منه أحد أكثر الأجرام تميّزًا في السماء." },
+    deepDive: { en: "Saturn is less dense than water — in principle, it would float in an ocean big enough to hold it. Its largest moon, Titan, has a thick atmosphere and lakes of liquid methane, making it one of the most Earth-like worlds in terms of surface processes, despite the extreme cold.", ar: "كثافة زحل أقل من كثافة الماء — من الناحية النظرية، كان سيطفو في محيط كبير بما يكفي لاحتوائه. أكبر أقماره، تيتان، يملك غلافًا جويًا كثيفًا وبحيرات من الميثان السائل، ما يجعله من أكثر العوالم شبهًا بالأرض من حيث العمليات السطحية رغم برودته الشديدة." },
     stats: [
-      { label: "Diameter", value: "116,460", unit: "km", approximate: true },
-      { label: "Distance from Sun", value: "1.43B", unit: "km (9.5 AU)", approximate: true },
-      { label: "Year length", value: "≈ 29.4", unit: "Earth years", approximate: true },
-      { label: "Known moons", value: "140+", unit: "", approximate: true }
+      { label: { en: "Diameter", ar: "القطر" }, value: "116,460", unit: km, approximate: true },
+      { label: { en: "Distance from Sun", ar: "البعد عن الشمس" }, value: "1.43B (9.5 AU)", unit: km, approximate: true },
+      { label: { en: "Year length", ar: "مدة الدوران حول الشمس" }, value: "≈ 29.4", unit: years, approximate: true },
+      { label: { en: "Known moons", ar: "الأقمار المعروفة" }, value: "140+", unit: { en: "", ar: "قمرًا" }, approximate: true }
     ],
-    facts: ["Saturn's rings are, proportionally, remarkably thin — often just tens of meters thick."],
+    facts: [
+      { en: "Saturn's rings are, proportionally, remarkably thin — often just tens of meters thick.", ar: "حلقات زحل رقيقة جدًا نسبيًا لاتساعها — سماكتها غالبًا لا تتجاوز عشرات الأمتار." }
+    ],
     colorHex: "#E8D2A0",
-    orbitRadiusPx: 320, orbitPeriodSec: 44, relativeSize: 13,
+    orbitRadiusPx: 250, orbitPeriodSec: 44, relativeSize: 15,
     ...NASA_SOURCE
   },
   {
-    id: "uranus", slug: "uranus", name: "Uranus", category: "planet",
-    tagline: "The ice giant tipped on its side",
-    summary: "Uranus rotates on an axis tilted roughly 98 degrees, so it essentially rolls around the Sun rather than spinning upright.",
-    deepDive: "Uranus and Neptune are classed as 'ice giants,' distinct from the gas giants Jupiter and Saturn, because a larger share of their interior is made of water, ammonia, and methane ices. Uranus's blue-green color comes from methane absorbing red light in its atmosphere.",
+    id: "uranus", slug: "uranus", category: "planet",
+    name: { en: "Uranus", ar: "أورانوس" },
+    tagline: { en: "The ice giant tipped on its side", ar: "العملاق الجليدي المائل على جنبه" },
+    summary: { en: "Uranus rotates on an axis tilted roughly 98 degrees, so it essentially rolls around the Sun rather than spinning upright.", ar: "يدور أورانوس حول محور مائل بنحو 98 درجة، فهو يتدحرج حول الشمس بدلًا من أن يدور منتصبًا." },
+    deepDive: { en: "Uranus and Neptune are classed as 'ice giants,' distinct from the gas giants Jupiter and Saturn, because a larger share of their interior is made of water, ammonia, and methane ices. Uranus's blue-green color comes from methane absorbing red light in its atmosphere.", ar: "يُصنَّف أورانوس ونبتون ضمن 'العمالقة الجليدية'، تمييزًا لهما عن عملاقي الغاز المشتري وزحل، إذ يتكوّن جزء أكبر من باطنهما من جليد الماء والأمونيا والميثان. لون أورانوس الأزرق المخضرّ مصدره غاز الميثان الذي يمتص الضوء الأحمر في غلافه الجوي." },
     stats: [
-      { label: "Diameter", value: "50,724", unit: "km", approximate: true },
-      { label: "Distance from Sun", value: "2.87B", unit: "km (19.8 AU)", approximate: true },
-      { label: "Year length", value: "≈ 84", unit: "Earth years", approximate: true },
-      { label: "Axial tilt", value: "≈ 98", unit: "degrees", approximate: true },
-      { label: "Known moons", value: "27", unit: "", approximate: true }
+      { label: { en: "Diameter", ar: "القطر" }, value: "50,724", unit: km, approximate: true },
+      { label: { en: "Distance from Sun", ar: "البعد عن الشمس" }, value: "2.87B (19.8 AU)", unit: km, approximate: true },
+      { label: { en: "Year length", ar: "مدة الدوران حول الشمس" }, value: "≈ 84", unit: years, approximate: true },
+      { label: { en: "Axial tilt", ar: "الميل المحوري" }, value: "≈ 98", unit: { en: "degrees", ar: "درجة" }, approximate: true },
+      { label: { en: "Known moons", ar: "الأقمار المعروفة" }, value: "27", unit: { en: "", ar: "قمرًا" }, approximate: true }
     ],
-    facts: ["Uranus's moons are named after Shakespeare and Alexander Pope characters, not mythological figures."],
+    facts: [
+      { en: "Uranus's moons are named after Shakespeare and Alexander Pope characters, not mythological figures.", ar: "تحمل أقمار أورانوس أسماء شخصيات من مسرحيات شكسبير وأشعار ألكسندر پوپ، لا من الأساطير." }
+    ],
     colorHex: "#8FD9D9",
-    orbitRadiusPx: 365, orbitPeriodSec: 54, relativeSize: 10,
+    orbitRadiusPx: 290, orbitPeriodSec: 54, relativeSize: 11,
     ...NASA_SOURCE
   },
   {
-    id: "neptune", slug: "neptune", name: "Neptune", category: "planet",
-    tagline: "The windiest world, found by math before a telescope",
-    summary: "Neptune is the most distant known planet and hosts the fastest winds recorded in the solar system.",
-    deepDive: "Neptune's existence was predicted mathematically from irregularities in Uranus's orbit before it was ever observed directly — the only planet discovered this way. Its largest moon, Triton, orbits backward relative to Neptune's rotation, suggesting it's a captured Kuiper Belt object.",
+    id: "neptune", slug: "neptune", category: "planet",
+    name: { en: "Neptune", ar: "نبتون" },
+    tagline: { en: "The windiest world, found by math before a telescope", ar: "أكثر العوالم رياحًا، اكتُشف بالحساب قبل التلسكوب" },
+    summary: { en: "Neptune is the most distant known planet and hosts the fastest winds recorded in the solar system.", ar: "نبتون أبعد الكواكب المعروفة، ويشهد أعنف الرياح المسجّلة في النظام الشمسي." },
+    deepDive: { en: "Neptune's existence was predicted mathematically from irregularities in Uranus's orbit before it was ever observed directly — the only planet discovered this way. Its largest moon, Triton, orbits backward relative to Neptune's rotation, suggesting it's a captured Kuiper Belt object.", ar: "تنبّأ العلماء رياضيًا بوجود نبتون من خلال اضطرابات في مدار أورانوس قبل رصده مباشرة — وهو الكوكب الوحيد الذي اكتُشف بهذه الطريقة. يدور قمره الأكبر، تريتون، بعكس اتجاه دوران نبتون، ما يشير إلى أنه جرم مأسور من حزام كايبر." },
     stats: [
-      { label: "Diameter", value: "49,244", unit: "km", approximate: true },
-      { label: "Distance from Sun", value: "4.5B", unit: "km (30.1 AU)", approximate: true },
-      { label: "Year length", value: "≈ 165", unit: "Earth years", approximate: true },
-      { label: "Known moons", value: "14", unit: "", approximate: true }
+      { label: { en: "Diameter", ar: "القطر" }, value: "49,244", unit: km, approximate: true },
+      { label: { en: "Distance from Sun", ar: "البعد عن الشمس" }, value: "4.5B (30.1 AU)", unit: km, approximate: true },
+      { label: { en: "Year length", ar: "مدة الدوران حول الشمس" }, value: "≈ 165", unit: years, approximate: true },
+      { label: { en: "Known moons", ar: "الأقمار المعروفة" }, value: "14", unit: { en: "", ar: "قمرًا" }, approximate: true }
     ],
-    facts: ["Neptune is the only planet in the solar system not visible to the naked eye from Earth."],
+    facts: [
+      { en: "Neptune is the only planet in the solar system not visible to the naked eye from Earth.", ar: "نبتون هو الكوكب الوحيد في النظام الشمسي غير المرئي بالعين المجردة من الأرض." }
+    ],
     colorHex: "#5A7FE0",
-    orbitRadiusPx: 405, orbitPeriodSec: 64, relativeSize: 10,
+    orbitRadiusPx: 325, orbitPeriodSec: 64, relativeSize: 11,
     ...NASA_SOURCE
   }
 ];

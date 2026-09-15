@@ -1,21 +1,17 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Breadcrumbs } from "@/components/EntryDetail";
 import CosmicScale from "@/components/CosmicScale";
-
-export const metadata: Metadata = {
-  title: "Cosmic Scale",
-  description: "Drag through the scales of the universe, from a human being to the observable universe."
-};
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function CosmicScalePage() {
+  const { t } = useLanguage();
+
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 pt-28 pb-16">
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Cosmic Scale" }]} />
-      <h1 className="font-display text-3xl sm:text-5xl text-starlight mt-4 text-balance">Cosmic Scale</h1>
-      <p className="mt-3 text-mute max-w-prose leading-8">
-        Drag the slider to move between scales — from a single human being to the edge of what we can
-        possibly observe.
-      </p>
+      <Breadcrumbs items={[{ label: t("breadcrumbHome"), href: "/" }, { label: t("navScale") }]} />
+      <h1 className="font-display text-3xl sm:text-5xl text-starlight mt-4 text-balance">{t("scaleTitle")}</h1>
+      <p className="mt-3 text-mute max-w-prose leading-8">{t("scaleSub")}</p>
       <div className="mt-10">
         <CosmicScale />
       </div>

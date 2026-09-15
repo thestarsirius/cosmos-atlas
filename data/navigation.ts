@@ -1,20 +1,22 @@
+// Nav items reference i18n keys (data/i18n.ts) rather than hardcoded labels
+// so the Navbar/Footer render correctly in both languages from one list.
 export interface NavLink {
-  label: string;
+  labelKey: "navExplore" | "navSolar" | "navStarMap" | "navScale" | "navTimeline" | "navGlossary" | "navAbout" | "navDiscover";
   href: string;
 }
 
 export const primaryNav: NavLink[] = [
-  { label: "Explore", href: "/explore" },
-  { label: "Solar System", href: "/solar-system" },
-  { label: "Star Map", href: "/star-map" },
-  { label: "Cosmic Scale", href: "/cosmic-scale" },
-  { label: "Timeline", href: "/timeline" },
-  { label: "Glossary", href: "/glossary" }
+  { labelKey: "navExplore", href: "/explore" },
+  { labelKey: "navSolar", href: "/solar-system" },
+  { labelKey: "navStarMap", href: "/star-map" },
+  { labelKey: "navScale", href: "/cosmic-scale" },
+  { labelKey: "navTimeline", href: "/timeline" },
+  { labelKey: "navGlossary", href: "/glossary" }
 ];
 
 export const footerNav: NavLink[] = [
-  { label: "About", href: "/about" },
-  { label: "Explore", href: "/explore" },
-  { label: "Cosmic Discovery", href: "/discover" },
-  { label: "Glossary", href: "/glossary" }
+  { labelKey: "navAbout", href: "/about" },
+  { labelKey: "navExplore", href: "/explore" },
+  { labelKey: "navDiscover", href: "/discover" },
+  { labelKey: "navGlossary", href: "/glossary" }
 ];
