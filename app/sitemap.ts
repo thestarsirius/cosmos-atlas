@@ -1,6 +1,10 @@
 import { MetadataRoute } from "next";
 import { allEntries, categoryRoute } from "@/data";
 
+// Required for `output: "export"` — without this, Next.js 15 fails to
+// statically generate this metadata route (see vercel/next.js#68667).
+export const dynamic = "force-static";
+
 const SITE_URL = "https://cosmos-atlas.pages.dev";
 
 export default function sitemap(): MetadataRoute.Sitemap {
